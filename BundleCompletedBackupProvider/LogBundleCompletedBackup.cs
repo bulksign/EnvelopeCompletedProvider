@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Bulksign.Extensibility;
 
-namespace BundleFinishedProvider
+namespace BundleCompletedProviderSample
 {
-	public class LogBundleFinished : IFinishedBundleBackupProvider
+	public class LogBundleCompletedBackup : Bulksign.Extensibility.ICompletedBundleBackupProvider
 	{
 		public Dictionary<string, string> Settings
 		{
@@ -11,7 +11,7 @@ namespace BundleFinishedProvider
 			set;
 		}
 
-		public string ProviderName => "LogBundleFinishedProvider";
+		public string ProviderName => "LogBundleCompletedBackup";
 
 		public event LogDelegate Log;
 
