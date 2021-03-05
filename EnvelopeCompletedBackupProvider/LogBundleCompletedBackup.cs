@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Bulksign.Extensibility;
 
-namespace BundleCompletedProviderSample
+namespace Bulksign.Sample
 {
-	public class LogBundleCompletedBackup : Bulksign.Extensibility.ICompletedBundleBackupProvider
+	public class LogEnvelopeCompletedBackup : ICompletedEnvelopeBackupProvider
 	{
 		public Dictionary<string, string> Settings
 		{
@@ -11,14 +11,14 @@ namespace BundleCompletedProviderSample
 			set;
 		}
 
-		public string ProviderName => "LogBundleCompletedBackup";
+		public string ProviderName => "LogEnvelopeCompletedBackup";
 
 		public event LogDelegate Log;
 
-		public string Process(string bundlePublicId, string archiveFilePath)
+		public string Process(string envelopeId, string archiveFilePath)
 		{
 			//just log the received information. Replace this and copy the file, back it up or read the file content and sent it to another service
-			Log(LogLevel.Info, null, $"Received bundle finished notification for bundle with id {bundlePublicId}, file path is {archiveFilePath}");
+			Log(LogLevel.Info, null, $"Received envelope completed for envelopeId '{envelopeId}', file path is {archiveFilePath}");
 
 			//a real provider should return here the identifier for the file (path , DMS id etc)
 			
