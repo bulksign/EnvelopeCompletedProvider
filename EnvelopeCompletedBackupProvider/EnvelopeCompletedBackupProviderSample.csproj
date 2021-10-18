@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bulksign.Extensibility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Bulksign.Extensibility.4.0.3-alpha\lib\net40-client\Bulksign.Extensibility.dll</HintPath>
+      <HintPath>..\packages\Bulksign.Extensibility.4.2.2\lib\net40-client\Bulksign.Extensibility.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
