@@ -6,27 +6,7 @@ namespace Bulksign.Sample
 {
 	public class LogEnvelopeCompletedBackup : ICompletedEnvelopeBackupProvider
 	{
-		public Dictionary<string, string> Settings
-		{
-			get;
-			set;
-		}
-
 		public string ProviderName => "LogEnvelopeCompletedBackup";
-
-		public HttpClient HttpClient
-		{
-			get;
-			set;
-		}
-
-		public IJsonSerializer JsonSerializer
-		{
-			get;
-			set;
-		}
-
-		public event LogDelegate Log;
 
 		public EnvelopeBackupResult Process(string envelopeId, byte[] zipCompletedDocuments, bool hasRejectedSignStep)
 		{
@@ -38,7 +18,7 @@ namespace Bulksign.Sample
 			{
 				Log(LogLevel.Info, null, $"Received envelope completed documents for envelopeId '{envelopeId}'");
 
-				//a real provider should send here the byte[] to a LongTerm Archiving/ DMS/ storage
+				//a real provider should send here the byte[] to a LongTerm Archiving/DMS/storage
 
 				//return a successful result. Since we didnt actually implemented the backup procedure here, we'll return an empty token
 				return new EnvelopeBackupResult()
@@ -63,6 +43,26 @@ namespace Bulksign.Sample
 					RequestIdentifier = string.Empty
 				};
 			}
+		}
+
+		public event LogDelegate Log;
+
+		public Dictionary<string, string> Settings
+		{
+			get;
+			set;
+		}
+		
+		public HttpClient HttpClient
+		{
+			get;
+			set;
+		}
+
+		public IJsonSerializer JsonSerializer
+		{
+			get;
+			set;
 		}
 	}
 }

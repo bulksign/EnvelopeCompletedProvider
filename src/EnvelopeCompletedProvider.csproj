@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Bulksign.Extensibility" Version="4.71.0" />
+      <PackageReference Include="Bulksign.Extensibility" Version="4.78.0" />
     </ItemGroup>
 
 </Project>
