@@ -6,53 +6,14 @@ namespace Bulksign.Sample
 {
 	public class LogEnvelopeCompletedBackup : ICompletedEnvelopeBackupProvider
 	{
-		public string ProviderName => "LogEnvelopeCompletedBackup";
-
-		public EnvelopeBackupResult Process(string envelopeId, byte[] zipCompletedDocuments, bool hasRejectedSignStep)
-		{
-			//envelopeId : the identifier of the envelope 
-			//zipCompletedDocuments : byte array with a zip file which contains ALL  envelope documents + the audit trail
-			//hasRejectedSignStep : flag which determines if the envelope has a rejected step.
-
-			try
-			{
-				Log(LogLevel.Info, null, $"Received envelope completed documents for envelopeId '{envelopeId}'");
-
-				//a real provider should send here the byte[] to a LongTerm Archiving/DMS/storage
-
-				//return a successful result. Since we didnt actually implemented the backup procedure here, we'll return an empty token
-				return new EnvelopeBackupResult()
-				{
-					BackupToken = string.Empty,
-					ErrorCode = 0,
-					ErrorMessage = string.Empty,
-					IsSuccess = true,
-					RequestIdentifier = string.Empty
-				};
-			}
-			catch (Exception ex)
-			{
-				Log?.Invoke(LogLevel.Error, ex);
-
-				return new EnvelopeBackupResult()
-				{
-					BackupToken = string.Empty,
-					ErrorCode = 1,
-					ErrorMessage = ex.Message,
-					IsSuccess = false,
-					RequestIdentifier = string.Empty
-				};
-			}
-		}
-
-		public event LogDelegate Log;
-
 		public Dictionary<string, string> Settings
 		{
 			get;
 			set;
 		}
-		
+
+		public string ProviderName => "LogEnvelopeCompletedBackup";
+
 		public HttpClient HttpClient
 		{
 			get;
@@ -63,6 +24,25 @@ namespace Bulksign.Sample
 		{
 			get;
 			set;
+		}
+
+		public event LogDelegate Log;
+
+		public EnvelopeBackupResult Process(EnvelopeBackup backup)
+		{
+			//just log the received information. Replace this and copy the file, back it up or read the file content and sent it to another service
+			Log?.Invoke(LogLevel.Info, null, $"Received envelope completed documents for envelopeId '{backup.EnvelopeId}'");
+
+			//a real provider should return here the identifier for the file (path , DMS id etc)
+			
+		
+			//for this sample just return string.Empty
+			return new EnvelopeBackupResult()
+			{
+				BackupToken = string.Empty,
+				IsSuccess = true
+			};
+
 		}
 	}
 }
