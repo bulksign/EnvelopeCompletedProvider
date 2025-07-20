@@ -28,16 +28,20 @@ namespace Bulksign.Sample
 
 		public event LogDelegate Log;
 
-		public string Process(string envelopeId, byte[] zipCompletedDocuments, bool hasRejectedSignStep)
+		public EnvelopeBackupResult Process(EnvelopeBackup backup)
 		{
 			//just log the received information. Replace this and copy the file, back it up or read the file content and sent it to another service
-			Log(LogLevel.Info, null, $"Received envelope completed documents for envelopeId '{envelopeId}'");
+			Log?.Invoke(LogLevel.Info, null, $"Received envelope completed documents for envelopeId '{backup.EnvelopeId}'");
 
 			//a real provider should return here the identifier for the file (path , DMS id etc)
 			
 		
 			//for this sample just return string.Empty
-			return string.Empty;
+			return new EnvelopeBackupResult()
+			{
+				BackupToken = string.Empty,
+				IsSuccess = true
+			};
 
 		}
 	}
